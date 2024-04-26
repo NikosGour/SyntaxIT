@@ -1,14 +1,22 @@
 package gr.dit.hua.nikosgourn;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
 	public static void main(String[] args) {
 		final int[] MOVIE_DURATIONS = { 90 , 85 , 75 , 60 , 120 , 150 , 125 };
 		final int FLIGHT_DURATION = 250;
-		System.out.println(Arrays.toString(recommend_two_movies(MOVIE_DURATIONS , FLIGHT_DURATION)));
+		Optional<int[]> result = recommend_two_movies(MOVIE_DURATIONS , FLIGHT_DURATION);
+		if (result.isPresent()) {
+			System.out.println(Arrays.toString(result.get()));
+		}
+		else{
+			System.out.println("No movie pair is short enough for this flight");
+		}
 	}
 	
 	/**
@@ -19,7 +27,7 @@ public class Main {
 	 * @param flight_duration the duration of the flight which is the constraint of the problem
 	 * @return a pair of indexes of the `movie_duration` param, which have the biggest sum of duration
 	 */
-	private static int[] recommend_two_movies(int[] movie_durations , int flight_duration) {
+	private static Optional<int[]> recommend_two_movies(int[] movie_durations , int flight_duration) {
 		int[] return_value;
 		List<int[]> pairs_found = new ArrayList<>();
 		final int MAX_ALLOWED = flight_duration - 30;
@@ -54,7 +62,10 @@ public class Main {
 				max_index = i;
 			}
 		}
+		if (pairs_found.isEmpty()) {
+			return Optional.empty();
+		}
 		return_value = pairs_found.get(max_index);
-		return return_value;
+		return Optional.of(return_value);
 	}
 }
