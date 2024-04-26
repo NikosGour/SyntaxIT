@@ -12,9 +12,12 @@ public class Main {
 		final int FLIGHT_DURATION = 250;
 		Optional<int[]> result = recommend_two_movies(MOVIE_DURATIONS , FLIGHT_DURATION);
 		handle_movie_result(result);
+		
+		// Test Cases
 		final int[][] TEST_MOVIE_DURATIONS =
 				{ { 90 , 85 , 75 , 60 , 120 , 150 , 125 } , { 30 , 70 , 120 , 130 , 123 , 140 , 160 } , { 160 , 120 , 50 , 30 , 110 , 94 , 50 } };
 		final int[] TEST_FLIGHT_DURATIONS = { 250 , 120 , 300 , 400 };
+		
 		for (int flight_duration : TEST_FLIGHT_DURATIONS) {
 			for (int[] movie_durations : TEST_MOVIE_DURATIONS) {
 				System.out.printf("For flight with duration: `%d` and movie durations: %s \nBest match: " , flight_duration ,
@@ -25,6 +28,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Unwrapping Optional result
+	 */
 	private static void handle_movie_result(Optional<int[]> result) {
 		if (result.isPresent()) {
 			System.out.println(Arrays.toString(result.get()));
