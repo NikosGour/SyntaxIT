@@ -11,10 +11,25 @@ public class Main {
 		final int[] MOVIE_DURATIONS = { 90 , 85 , 75 , 60 , 120 , 150 , 125 };
 		final int FLIGHT_DURATION = 250;
 		Optional<int[]> result = recommend_two_movies(MOVIE_DURATIONS , FLIGHT_DURATION);
+		handle_movie_result(result);
+		final int[][] TEST_MOVIE_DURATIONS =
+				{ { 90 , 85 , 75 , 60 , 120 , 150 , 125 } , { 30 , 70 , 120 , 130 , 123 , 140 , 160 } , { 160 , 120 , 50 , 30 , 110 , 94 , 50 } };
+		final int[] TEST_FLIGHT_DURATIONS = { 250 , 120 , 300 , 400 };
+		for (int flight_duration : TEST_FLIGHT_DURATIONS) {
+			for (int[] movie_durations : TEST_MOVIE_DURATIONS) {
+				System.out.printf("For flight with duration: `%d` and movie durations: %s \nBest match: " , flight_duration ,
+				                  Arrays.toString(movie_durations));
+				handle_movie_result(recommend_two_movies(movie_durations , flight_duration));
+				System.out.println("-".repeat(70));
+			}
+		}
+	}
+	
+	private static void handle_movie_result(Optional<int[]> result) {
 		if (result.isPresent()) {
 			System.out.println(Arrays.toString(result.get()));
 		}
-		else{
+		else {
 			System.out.println("No movie pair is short enough for this flight");
 		}
 	}
