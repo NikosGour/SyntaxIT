@@ -1,6 +1,5 @@
 package gr.dit.hua.nikosgourn;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
